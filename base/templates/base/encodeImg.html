@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+        {{ form.image.errors }}
+        
+    </div>
+    <div class="fieldWrapper">
+        {{ form.message.label_tag }}
+        {{ form.message }}
+        {{ form.message.errors }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        {{ form.password.errors }}
+    </div>
+    <div class="fieldWrapper">
+        {{ form.dest.label_tag }}
+        {{ form.dest }}
+    </div>
+
+    <button type="submit">Encode Image</button>
+</form>
+
+{% if message %}
+    <div class="message">
+        {{ message }}
+    </div>
+{% endif %}
+
+{% endblock content %}
