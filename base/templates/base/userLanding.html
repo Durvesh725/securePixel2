@@ -1,0 +1,10 @@
+{% extends 'main.html' %} {% block content %}
+
+<div>
+  <hr />
+  <a href="{% url 'encode-img' %}">Encode Image</a>
+  <a href="{% url 'decode-img' %}">Decode Image</a>
+  <hr />
+</div>
+
+{% endblock content %}

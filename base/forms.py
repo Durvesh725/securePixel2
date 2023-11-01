@@ -8,7 +8,14 @@ class EncodeImageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
     password = forms.CharField(max_length=128, widget=forms.PasswordInput)
     dest = forms.CharField(initial='encoded_image.png')
-    receiver = forms.ModelChoiceField(queryset=User.objects.all(), label = 'Select Receiver')
+    receiver = forms.ModelChoiceField(queryset=User.objects.all(), label = 'Receiver')
+
+    def __init__(self, *args, **kwargs):
+        super(EncodeImageForm, self).__init__(*args, **kwargs)
+        self.fields['message'].widget.attrs.update({'class': 'custom-message'})
+        self.fields['password'].widget.attrs.update({'class': 'custom-password'})
+        self.fields['dest'].widget.attrs.update({'class': 'custom-dest'})
+        self.fields['receiver'].widget.attrs.update({'class': 'custom-receiver'})
 
 
 class DecodeImageForm(forms.Form):
@@ -33,8 +40,8 @@ class RegistrationForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=150, label='Username')
-    password = forms.CharField(widget=forms.PasswordInput, label='Password')
+    username = forms.CharField(max_length=150, label='Enter Username')
+    password = forms.CharField(widget=forms.PasswordInput, label='Enter Password')
 
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)

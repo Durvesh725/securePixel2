@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EncodeImageForm, DecodeImageForm, RegistrationForm, LoginForm
 from .models import steganography, UserRegistration
@@ -32,10 +33,10 @@ def registerUser(request):
             user_registration.save()
             login(request, user)
             # username = user.username
-            return redirect('home')
+            return redirect('landing')
     else:
         form = RegistrationForm()
-    return render(request, 'base/register.html', {'form': form})
+    return render(request, 'base/SignUp.html', {'form': form})
 
 
 # login view
@@ -50,14 +51,14 @@ def loginUser(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('landing')
             else:
                 error_message = "Invalid username or password."
 
     else:
         form = LoginForm()
 
-    return render(request, 'base/login.html', {'form': form, 'error_message': error_message})
+    return render(request, 'base/SignIn.html', {'form': form, 'error_message': error_message})
 
 # logout view
 def logout_view(request):
@@ -135,6 +136,8 @@ logger = logging.getLogger('base')
 
 def encode_image(request):
     media_root = settings.MEDIA_ROOT
+    success_message = ""
+    error_message = ""
     if request.method == 'POST':
         form = EncodeImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -208,15 +211,16 @@ def encode_image(request):
                 encoded_img_rel_path = os.path.relpath(encoded_image_path, media_root)
                 original_image.encoded_img = encoded_img_rel_path
                 original_image.save()
-
-                return redirect('success')
+                # return redirect('success')
+                success_message = "Image encoding was successful."
             except Exception as e:
-                logger.error(str(e))
-                return render(request, 'base/error.html', {'message': str(e)})
+                # logger.error(str(e))
+                # return render(request, 'base/error.html', {'message': str(e)})
+                error_message = str(e)
     else:
         form = EncodeImageForm()
 
-    return render(request, 'base/encodeImg.html', {'form': form})
+    return render(request, 'base/encodeImg.html', {'form': form, 'success_message': success_message, 'error_message': error_message})
 
 # decode image view
 # def decode_image(request):
@@ -376,4 +380,7 @@ def success(request):
 # try - login_register
 def login_register(request):
     return render(request, 'base/login_register.html')
+
+def userLanding(request):
+    return render(request, 'base/userLanding.html')
 
