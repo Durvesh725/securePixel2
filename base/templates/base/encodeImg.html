@@ -1,38 +1,46 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+<a href="{% url 'home' %}">Go Back</a>
+<br><br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            {{ form.image.errors }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+            {{ form.message.errors }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.dest.label_tag }}
+            {{ form.dest }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.receiver.label_tag }}
+            {{ form.receiver }}
+        </div>
+    
+        <button type="submit">Encode Image</button>
+    </form>
 
-    {{ form.non_field_errors }}
-    <div class="fieldWrapper">
-        {{ form.image.label_tag }}
-        {{ form.image }}
-        {{ form.image.errors }}
-        
-    </div>
-    <div class="fieldWrapper">
-        {{ form.message.label_tag }}
-        {{ form.message }}
-        {{ form.message.errors }}
-    </div>
-    <div class="fieldWrapper">
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        {{ form.password.errors }}
-    </div>
-    <div class="fieldWrapper">
-        {{ form.dest.label_tag }}
-        {{ form.dest }}
-    </div>
-
-    <button type="submit">Encode Image</button>
-</form>
-
+<br>
 {% if message %}
+    <hr>
     <div class="message">
         {{ message }}
     </div>
+    <hr>
 {% endif %}
 
 {% endblock content %}

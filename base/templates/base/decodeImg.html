@@ -1,0 +1,151 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <!-- <h1>Decode an Encoded Image</h1> -->
+    <!-- <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Decode">
+    </form> -->
+
+    <!-- records -->
+    <!-- {% if steg_records %}
+    <h2>Hey {{user.username}}, you have new Messages</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Sent by</th>
+                <th>Image Received</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in steg_records %}
+                <tr>
+                    <td>{{ record.sender.username }}</td>
+                    <td>{{ record.dest }}</td>
+                    <td>{{ record.created | timesince }} ago</td>
+                    <td>
+                        <a href="{{ record.encoded_img.url }}" target="_blank">View Image</a>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'decode-img' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="image_url" value="{{ record.encoded_img.url }}">
+                            <input type="password" name="password" placeholder="Password Required">
+                            <input type="submit" value="Decode">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No new Messages!</p>
+    {% endif %}
+
+    {% if message %}
+        <h2>Decoded Message:</h2>
+        <p>{{ message }}</p>
+    {% endif %}
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+
+</div> -->
+
+<!-- Outer container -->
+<style>
+    .decoded-message-box {
+        height: 300px; /* Adjust the height as needed */
+        overflow-y: scroll;
+        overflow-x: hidden;
+        word-wrap: break-word;
+    }
+
+    /* Adjust the width of the table inside the left card */
+    .table-bordered {
+        width: 100%; /* You can adjust this value as needed */
+    }
+</style>
+
+<div class="mt-4 mx-5">
+    <div class="row">
+        <div class="col-md-7"> <!-- Increased the width of the left card -->
+            {% if steg_records %}
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center"> <!-- Using flexbox classes -->
+                        <a href=""><button type="button" class="btn btn-outline-primary mb-2">Go Back</button></a>
+                        <h5 class="card-title text-right">Welcome {{user.username}}, <span class="badge badge-pill badge-primary">{{steg_records.count}} new Messages</span></h5>
+                    </div>
+                    <table class="table table-bordered"> <!-- Increased the width of the table -->
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Sender</th>
+                                <th>Image Received</th>
+                                <th>Time</th>
+                                <th>Image Preview</th>
+                                <th>Decode</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in steg_records %}
+                                <tr>
+                                    <td>{{ record.sender.username }}</td>
+                                    <td>
+                                        <p>{{record.dest}}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{record.created | timesince}}</p>
+                                    </td>
+                                    <td>
+                                        <a href="{{ record.encoded_img.url }}" target="_blank">View Image</a>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="{% url 'decode-img' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="image_url" value="{{ record.encoded_img.url }}">
+                                            <input type="password" name="password" placeholder="Password Required" class="form-control">
+                                            <input type="submit" value="Decode" class="btn btn-primary mt-2">
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    No New Messages!
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-5">
+            {% if message %}
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title lead">Decoded Message:</h2>
+                    <div class="decoded-message-box border p-2">
+                        <p>{{ message }}</p>
+                    </div>
+                    <br>
+                    <div class="alert alert-success mt-5" role="alert">
+                        SUCCESS
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if error_message %}
+                <div class="alert alert-danger mt-5" role="alert">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

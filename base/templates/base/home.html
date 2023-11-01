@@ -1,5 +1,32 @@
-{% extends 'main.html' %}
-
-{% block content %}
 <h1>WELCOME TO SECURE PIXEL</h1>
-{% endblock content %}
+
+<div>
+  {% if user.is_authenticated %}
+  <div>
+    {% if user.userregistration.profile_picture %}
+        <img
+        src="{{user.userregistration.profile_picture.url }}"
+        alt="Profile Picture"
+        width="100"
+        height="100"
+        />
+    {% else %}
+        <p>No Profile picture</p>
+    {% endif %}
+    <h2>Welcome {{ user.username }}</h2>
+    <hr />
+    <a href="{% url 'logout' %}">Logout</a>
+    <br />
+    <div>
+      <hr />
+      <a href="{% url 'encode-img' %}">Encode Image</a>
+      <a href="{% url 'decode-img' %}">Decode Image</a>
+      <hr />
+    </div>
+  </div>
+  {% else %}
+  <a href="{% url 'register' %}">Register</a>
+  <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+</div>
+<br />
