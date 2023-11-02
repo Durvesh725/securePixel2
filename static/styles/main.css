@@ -31,8 +31,10 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #343a40; /* Choose the background color you prefer */
-  color: white; /* Text color for the footer */
+  background-color: #343a40;
+  /* Choose the background color you prefer */
+  color: white;
+  /* Text color for the footer */
   text-align: center;
 }
 
@@ -150,7 +152,7 @@ span {
 
 /****************************** navbar end *******************************/
 
-/*************************** Background video *************************/
+/**************************** Background video **************************/
 
 .bgvideo video {
   margin: auto;
@@ -418,12 +420,10 @@ input {
 }
 
 .overlay {
-  background: linear-gradient(
-    120deg,
-    rgb(8, 3, 95) 0%,
-    rgba(78, 78, 189, 1) 45%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: linear-gradient(120deg,
+      rgb(8, 3, 95) 0%,
+      rgba(78, 78, 189, 1) 45%,
+      rgba(0, 212, 255, 1) 100%);
   background-repeat: no-repeat;
   background-size: cover;
   color: #ffffff;
@@ -552,7 +552,7 @@ input {
   padding: 3%;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-      0 10px 10px rgba(0, 0, 0, 0.22);
+    0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   height: 550px;
 }
