@@ -23,7 +23,7 @@
                 <a href="https://www.google.com" target id="about">About us</a>
                 <a href="{% url 'logout' %}" target id="sign">Logout</a>
                 {% if user.userregistration.profile_picture %}
-                <a href="https://www.google.com" target id="profile">
+                <a href="{% url 'landing' %}" target id="profile">
                     <div class="profile-box">
                       <img src="{{user.userregistration.profile_picture.url }}" alt="Profile Image" class="profile-image" />
                     </div>
