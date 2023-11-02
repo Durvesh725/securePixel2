@@ -5,6 +5,54 @@
   <a href="{% url 'encode-img' %}">Encode Image</a>
   <a href="{% url 'decode-img' %}">Decode Image</a>
   <hr />
+
+  <p>Sent logs</p>
+  <table class="table table-bordered">
+    <!-- Increased the width of the table -->
+    <thead class="thead-dark">
+      <tr>
+        <th>Sent Image</th>
+        <th>Last modified</th>
+        <th>Time</th>
+        <th>Image Preview</th>
+        <th>Decode</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in steg_records %}
+      <tr>
+        <td>{{ record.sender.username }}</td>
+        <td>
+          <p>{{record.dest}}</p>
+        </td>
+        <td>
+          <p>{{record.created | timesince}} ago</p>
+        </td>
+        <td>
+          <a href="{{ record.encoded_img.url }}" target="_blank">View Image</a>
+        </td>
+        <td>
+          <form method="post" action="{% url 'decode-img' %}" class="p-0">
+            {% csrf_token %}
+            <input
+              type="hidden"
+              name="image_url"
+              value="{{ record.encoded_img.url }}"
+              class="p-0"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password Required"
+              class="form-control"
+            />
+            <input type="submit" value="Decode" class="btn btn-primary mt-2" />
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 
 {% endblock content %}

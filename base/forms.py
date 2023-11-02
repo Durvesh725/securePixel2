@@ -25,13 +25,13 @@ class DecodeImageForm(forms.Form):
 
 class RegistrationForm(UserCreationForm):
     profile_picture = forms.ImageField(required=False, label='Profile Picture')
-    email = forms.CharField(label='Email')
+    email = forms.CharField(label='Email', widget=forms.TextInput(attrs={"placeholder": "johndoe@gmail.com"}))
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'custom-username'})
-        self.fields['password1'].widget.attrs.update({'class': 'custom-password1'})
-        self.fields['password2'].widget.attrs.update({'class': 'custom-password2'})
+        self.fields['username'].widget.attrs.update({'class': 'custom-username', 'placeholder': 'Username'})
+        self.fields['password1'].widget.attrs.update({'class': 'custom-password1', 'placeholder': 'Enter Password'})
+        self.fields['password2'].widget.attrs.update({'class': 'custom-password2', 'placeholder': 'Confirm Password'})
         self.fields['email'].widget.attrs.update({'class': 'custom-email'})
 
     class Meta:

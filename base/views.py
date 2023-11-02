@@ -33,7 +33,7 @@ def registerUser(request):
             user_registration.save()
             login(request, user)
             # username = user.username
-            return redirect('landing')
+            return redirect('home')
     else:
         form = RegistrationForm()
     return render(request, 'base/SignUp.html', {'form': form})
@@ -382,5 +382,8 @@ def login_register(request):
     return render(request, 'base/login_register.html')
 
 def userLanding(request):
-    return render(request, 'base/userLanding.html')
+    user = request.user
+    sent_records = steganography.objects.filter(sender=user).order_by('-created')
+    receiver_records = steganography.objects.filter(receiver=user).order_by('-created')
+    return render(request, 'base/userLanding.html', {'sent_records': sent_records, 'receiver_records': receiver_records})
 
