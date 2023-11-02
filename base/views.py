@@ -384,6 +384,15 @@ def login_register(request):
 def userLanding(request):
     user = request.user
     sent_records = steganography.objects.filter(sender=user).order_by('-created')
+    records_found_s = any(request.user == record.sender for record in sent_records)
+
     receiver_records = steganography.objects.filter(receiver=user).order_by('-created')
-    return render(request, 'base/userLanding.html', {'sent_records': sent_records, 'receiver_records': receiver_records})
+    records_found_r = any(request.user == record.receiver for record in receiver_records)
+    
+    for record in sent_records:
+        record.image_name = record.image.url.split("/")[-1] 
+
+    for record in receiver_records:
+        record.image_name = record.image.url.split("/")[-1]
+    return render(request, 'base/userLanding.html', {'sent_records': sent_records, 'receiver_records': receiver_records, 'records_found_r': records_found_r, 'records_found_s': records_found_s })
 

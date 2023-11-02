@@ -26,11 +26,15 @@
 
       <!-- Input from backend -->
       <div class="input">
-          {{ form.username }}
+          <!-- {{ form.username }}
           <small class="text-warning">{{ form.username.errors }}</small>
 
           {{ form.password }}
-          <small class="text-warning">{{ form.password.errors }}</small>
+          <small class="text-warning">{{ form.password.errors }}</small> -->
+            <input type="text" name="username" placeholder="Username">
+            <small class="text-warning">{{ form.username.errors }}</small>
+            <input type="password" name="password" placeholder="Password">
+            <small class="text-warning">{{ form.password.errors }}</small>
       </div>
       <!-- Input ends here -->
 
