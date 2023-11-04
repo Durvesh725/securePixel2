@@ -3,11 +3,11 @@
 {% block content %}
 
 <div class="bgvideo">
-  <video autoplay muted loop>
+  {% comment %} <video autoplay muted loop>
     <source
       src="https://res.cloudinary.com/dzy2zn0mz/video/upload/v1698215482/SecurePixel/bgvideo.mp4"
     />
-  </video>
+  </video> {% endcomment %}
 </div>
 
 <div class="container" id="container">
@@ -25,15 +25,13 @@
       <span>or use your account</span></br>
 
       <!-- Input from backend -->
-      <div class="input">
-          {{ form.username }}
-          <small class="text-warning">{{ form.username.errors }}</small>
-
-          {{ form.password }}
-          <small class="text-warning">{{ form.password.errors }}</small>
-      </div>
+        <div class="input">
+            <input type="text" name="username" placeholder="Username">
+            <small class="text-warning">{{ form.username.errors }}</small>
+            <input type="password" name="password" placeholder="Password">
+            <small class="text-warning">{{ form.password.errors }}</small>
+        </div>
       <!-- Input ends here -->
-
       <a href="#" id="forgot_pass">Forgot your password ?</a>
       <a href="index.html" class="signin_link">
         <button class="signin_button" type="submit" value="Login">Signin</button>
