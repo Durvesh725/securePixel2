@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
-      href="{% static 'assets/favicon.ico' %}"
+      href="https://res.cloudinary.com/dzy2zn0mz/image/upload/v1698769946/SecurePixel/Images/MainLogo.png"
       type="image/x-icon"
     />
     <link
@@ -26,23 +26,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     />
 
-    <title>SecurePixel - Secure your Future with us</title>
+    <title>SecurePixel</title>
   </head>
 
   <body>
     {% include 'navbar.html' %}
-    <!-- display flash messages
-    anywhere if the flash message appears in the app...display it here -->
-    <!-- {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}  -->
-    {% block content %} 
-    
+    {% block content %}     
     {% endblock content %}
-    <!-- <script src="{% static 'js/script.js' %}" defer></script> -->
   </body>
 </html>

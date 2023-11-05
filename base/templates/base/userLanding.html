@@ -1,12 +1,12 @@
 {% extends 'main.html' %} {% block content %}
 
-<div>
-  <hr />
+<div style="margin:1%">
+  <hr>
   <div class="text-center">
-    <a href="{% url 'encode-img' %}">Encode Image</a>
-    <a href="{% url 'decode-img' %}">Decode Image</a>
+    <a href="{% url 'encode-img' %}" class="btn btn-primary rounded-lg">Encode Image</a>
+    <a href="{% url 'decode-img' %}" class="btn btn-primary rounded-lg">Decode Image</a>
   </div>
-  <hr />
+  <hr>
 
   <!-- -----------SENT LOGS TABLE BEGINS---------------- -->
   <p>Sent logs</p>
